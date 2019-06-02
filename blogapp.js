@@ -34,6 +34,20 @@ app.get("/compose", function(req, res){
     res.render("compose");
 });
 
+app.get("/posts/:postName", function(req, res){
+    requestedTitle = _.lowerCase(req.params.postName);
+    
+    posts.forEach(function(post){
+        const storedTitle = post.title;
+
+        if(storedTitle === requestedTitle){
+            console.log("macth found");
+        } else{
+            console.log("no match");
+        }
+    });
+});
+
 app.post("/compose", function(req, res){
     const post = {
         title: req.body.postTitle,
