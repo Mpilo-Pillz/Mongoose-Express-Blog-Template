@@ -38,13 +38,15 @@ app.get("/posts/:postName", function(req, res){
     requestedTitle = _.lowerCase(req.params.postName);
     
     posts.forEach(function(post){
-        const storedTitle = post.title;
+        const storedTitle = _.lowerCase(post.title);
 
         if(storedTitle === requestedTitle){
-            console.log("macth found");
-        } else{
-            console.log("no match");
-        }
+            res.render("post",{
+                postTitleFromServer: post.title,
+                postContentFromServer: post.content
+            });
+        } 
+       
     });
 });
 
