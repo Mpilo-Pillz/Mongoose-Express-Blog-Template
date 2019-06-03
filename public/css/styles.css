@@ -1,0 +1,20 @@
+
+.container-fluid {
+  padding-top: 70px;
+  padding-bottom: 70px;
+}
+
+body {
+    background-color: salmon !important;
+  }
+
+  label {
+    cursor: pointer;
+    color:wheat;
+    display: block;
+    padding: 10px;
+    margin: 3px;
+}
+.navbar {
+  color:wheat;
+}
