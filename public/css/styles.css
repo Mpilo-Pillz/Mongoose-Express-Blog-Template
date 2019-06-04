@@ -5,7 +5,8 @@
 }
 
 body {
-    background-color: salmon !important;
+    background-color: rgb(51, 49, 49) !important;
+    color:wheat;
   }
 
   label {
@@ -17,4 +18,29 @@ body {
 }
 .navbar {
   color:wheat;
+}
+.formBox {
+  width: 50%;
+  padding: 10px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.footer-padding {
+	padding-bottom: 60px;
+}
+
+.footer {
+	position: absolute;
+	text-align: center;
+	bottom: 0;
+	width: 100%;
+	height: 60px;
+	background-color: #0778c4;
+}
+
+.footer p {
+	margin-top: 25px;
+	font-size: 15px;
+  color: #fff;
 }
