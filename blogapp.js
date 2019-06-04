@@ -10,19 +10,27 @@ const contactStartingContent = "";
 
 const app = express();
 const port = 3000;
-
+mongoose.connect("mongodb://localhost:27017/testAutomationDB", {useNewUrlParser: true});
 app.set('view engine', 'ejs');
 
 app.use(bodyParser.urlencoded({extended: true}));
-// app.use(express.static(__dirname + "public"));
 app.use(express.static(__dirname + '/public'));
 
 let posts = [];
+const postSchema={
+    title: String,
+    content: String
+}
+
+const Post = new mongoose.model("Post", postSchema);
 
 app.get("/", function(req, res){
-    res.render("home", {
-    startingContent: homeStartingContent,
-    postsFromServer: posts});
+    Post.find({}, function(err, posts){
+    res.render("home",{
+        startingContent: homeStartingContent,
+        postsFromServer: posts
+    });
+})
 });
 app.get("/about", function(req, res){
     res.render("about", {startingContent: homeStartingContent});
@@ -35,29 +43,29 @@ app.get("/compose", function(req, res){
     res.render("compose");
 });
 
-app.get("/posts/:postName", function(req, res){
-    requestedTitle = _.lowerCase(req.params.postName);
+app.get("/posts/:postId", function(req, res){
+   const requestedTitle = req.params.postId;
     
-    posts.forEach(function(post){
-        const storedTitle = _.lowerCase(post.title);
 
-        if(storedTitle === requestedTitle){
+        
+        Post.findOne({_id: requestedTitle}, function(err, post){
             res.render("post",{
                 postTitleFromServer: post.title,
                 postContentFromServer: post.content
             });
-        } 
-       
-    });
+        });       
 });
 
 app.post("/compose", function(req, res){
-    const post = {
+    const post = new Post({
         title: req.body.postTitle,
         content: req.body.postContent
-    }
-    posts.push(post);
-    res.redirect("/");
+    });
+   post.save(function(err){
+       if(!err){
+        res.redirect("/");
+       }
+   }); 
 });
 
 

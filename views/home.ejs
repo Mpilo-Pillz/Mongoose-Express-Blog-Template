@@ -6,6 +6,6 @@
 <%postsFromServer.forEach(function(serverPost){%>
     <h1><%= serverPost.title%></h1>
     <p><%= serverPost.content.substring(0, 100) + "..."%>
-    <a href="/posts/<%=serverPost.title %>">Read More</a></p>
+    <a href="/posts/<%=serverPost._id %>">Read More</a></p>
 <%});%>
 <%- include("partials/footer");%>
